@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#app .react-datepicker-wrapper {
+  display: block;
+}

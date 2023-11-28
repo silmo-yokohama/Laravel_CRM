@@ -6,8 +6,8 @@ const ItemsEditor = ({ itemValues, onChange, onSubmit, isEditable, errors, proce
   return (
     <div>
       <form action="" method="post" onSubmit={isEditable && onSubmit}>
-        <div className="container px-5 py-24 mx-auto">
-          <div className="lg:w-1/2 md:w-2/3 mx-auto">
+        <div className="container px-5 py-10 mx-auto">
+          <div className="lg:w-5/6 md:w-2/3 mx-auto">
             <div className="flex flex-wrap -m-2">
               <div className="p-2 w-1/2">
                 <div className="relative">
@@ -52,7 +52,7 @@ const ItemsEditor = ({ itemValues, onChange, onSubmit, isEditable, errors, proce
                     id="memo"
                     name="memo"
                     onChange={onChange}
-                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out disabled:border-0 disabled:bg-transparent"
+                    className="w-full bg-gray-100 bg-opacity-50 leading-3 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none transition-colors duration-200 ease-in-out disabled:border-0 disabled:bg-transparent"
                     disabled={!isEditable}
                     value={itemValues.memo}
                   ></textarea>
