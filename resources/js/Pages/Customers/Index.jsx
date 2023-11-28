@@ -1,15 +1,24 @@
+import CustomerPaginations from '@/Components/CustomerPaginations';
+import CustomerSearchForm from '@/Components/CustomerSearchForm';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Index(props) {
-  const { auth, items } = props;
+  const { auth, customers } = props;
+  const form = useForm({});
+  const setSearchText = (e) => {
+    form.setData('search', e.target.value);
+  };
+  const searchCustomer = () => {
+    form.get(route('customers.index', { search: form.data.search }));
+  };
 
   return (
     <AuthenticatedLayout
       user={auth.user}
       header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">商品一覧</h2>}
     >
-      <Head title="商品一覧" />
+      <Head title="顧客一覧" />
 
       <div className="py-8">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -19,16 +28,18 @@ export default function Index(props) {
                 <div className="container px-5 py-10 mx-auto">
                   <div className="flex flex-col text-center w-full mb-5">
                     <div className="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
-                      <a className="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0">
-                        Learn More
-                      </a>
+                      <CustomerSearchForm
+                        value={form.data.search}
+                        onChange={setSearchText}
+                        onClick={searchCustomer}
+                      />
 
                       <Link
-                        href={route('items.create')}
+                        href={route('customers.create')}
                         as="button"
                         className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded"
                       >
-                        商品追加
+                        顧客追加
                       </Link>
                     </div>
                   </div>
@@ -44,41 +55,33 @@ export default function Index(props) {
                             Name
                           </th>
                           <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                            Price
+                            Kana
                           </th>
                           <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                            Updated
-                          </th>
-                          <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">
-                            Activate
+                            Tel Number
                           </th>
                         </tr>
                       </thead>
                       <tbody>
-                        {items &&
-                          items.map((item) => (
-                            <tr key={item.id}>
-                              <td className="px-4 py-3">{item.id}</td>
+                        {customers &&
+                          customers.data &&
+                          customers.data.map((customer) => (
+                            <tr key={customer.id}>
+                              <td className="px-4 py-3">{customer.id}</td>
                               <td className="px-4 py-3">
-                                <Link href={route('items.show', { item: item.id })}>
-                                  {item.name}
+                                <Link href={route('customers.edit', { customer: customer.id })}>
+                                  {customer.name}
                                 </Link>
                               </td>
-                              <td className="px-4 py-3">{'￥' + item.price.toLocaleString()}</td>
-                              <td className="px-4 py-3 text-lg text-gray-900">{item.updated_at}</td>
-                              <td className="w-10 text-center">
-                                {item.is_selling === 1 ? (
-                                  <span className="text-green-700">販売中</span>
-                                ) : (
-                                  <span className="text-red-800">停止中</span>
-                                )}
-                              </td>
+                              <td className="px-4 py-3">{customer.kana}</td>
+                              <td className="px-4 py-3 text-lg text-gray-900">{customer.tel}</td>
                             </tr>
                           ))}
-                        <tr></tr>
                       </tbody>
                     </table>
                   </div>
+
+                  <CustomerPaginations links={customers.links} />
                 </div>
               </section>
             </div>
