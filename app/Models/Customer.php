@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Purchase;
 
 class Customer extends Model
 {
@@ -16,5 +17,9 @@ class Customer extends Model
                 return $query->where('kana' ,'like' ,$searchInput.'%')->orWhere('tel' ,'like' ,$searchInput . '%')->where('is_deleted','=' ,false);
             }
         }
+    }
+
+    function purchases() {
+        return $this->hasMany(Purchase::class);
     }
 }
