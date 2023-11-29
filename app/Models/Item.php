@@ -16,4 +16,9 @@ class Item extends Model
         'is_selling',
         'version',
     ];
+
+    function purchases() {
+        return $this->belongsToMany(Purchase::class)->withPivot('count');
+    }
+
 }

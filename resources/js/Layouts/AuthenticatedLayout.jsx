@@ -33,6 +33,12 @@ export default function Authenticated({ user, header, children }) {
                 >
                   顧客管理
                 </NavLink>
+                <NavLink
+                  href={route('purchases.create')}
+                  active={route().current('purchases.create')}
+                >
+                  購入管理
+                </NavLink>
               </div>
             </div>
 
@@ -106,6 +112,12 @@ export default function Authenticated({ user, header, children }) {
             </ResponsiveNavLink>
             <ResponsiveNavLink href={route('items.index')} active={route().current('items.index')}>
               商品管理
+            </ResponsiveNavLink>
+            <ResponsiveNavLink
+              href={route('purchases.create')}
+              active={route().current('purchases.create')}
+            >
+              購入管理
             </ResponsiveNavLink>
           </div>
 
