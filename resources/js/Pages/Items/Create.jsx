@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import ItemsEditor from '@/Components/ItemsEditor';
+import FlashMessage from '@/Components/FlashMessage';
 
 export default function Create(props) {
   const { auth } = props;
@@ -47,6 +48,7 @@ export default function Create(props) {
           </div>
         </div>
       </div>
+      <FlashMessage flash={props.flash} />
     </AuthenticatedLayout>
   );
 }

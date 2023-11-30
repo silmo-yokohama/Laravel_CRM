@@ -1,4 +1,6 @@
+import FlashMessage from '@/Components/FlashMessage';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { dateTimeToString } from '@/common/dateToString';
 import { Head, Link } from '@inertiajs/react';
 
 export default function Index(props) {
@@ -65,7 +67,9 @@ export default function Index(props) {
                                 </Link>
                               </td>
                               <td className="px-4 py-3">{'￥' + item.price.toLocaleString()}</td>
-                              <td className="px-4 py-3 text-lg text-gray-900">{item.updated_at}</td>
+                              <td className="px-4 py-3 text-lg text-gray-900">
+                                {dateTimeToString(new Date(item.updated_at))}
+                              </td>
                               <td className="w-10 text-center">
                                 {item.is_selling === 1 ? (
                                   <span className="text-green-700">販売中</span>
@@ -85,6 +89,7 @@ export default function Index(props) {
           </div>
         </div>
       </div>
+      <FlashMessage flash={props.flash} />
     </AuthenticatedLayout>
   );
 }

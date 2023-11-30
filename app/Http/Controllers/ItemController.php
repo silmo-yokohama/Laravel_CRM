@@ -40,7 +40,11 @@ class ItemController extends Controller
             'memo'  => $request->memo
         ]);
 
-        return to_route('items.index');
+        return to_route('items.index')
+            ->with([
+                'message' => '商品の登録が完了しました。' ,
+                'status'  => 'success'
+            ]);
     }
 
     /**
@@ -70,7 +74,11 @@ class ItemController extends Controller
 
         $item->save();
 
-        return to_route('items.edit' ,['item' => $item]);
+        return to_route('items.index' ,['item' => $item])
+            ->with([
+                'message' => '商品情報を更新しました。' ,
+                'status'  => 'success'
+            ]);
     }
 
     /**
@@ -83,9 +91,10 @@ class ItemController extends Controller
 
         $item->save();
 
-        return to_route('items.index')->with([
-            'message'   => '削除しました',
-            'status'    => 'danger'
-        ]);
+        return to_route('items.index')
+            ->with([
+                'message'   => '商品を削除しました',
+                'status'    => 'success'
+            ]);
     }
 }

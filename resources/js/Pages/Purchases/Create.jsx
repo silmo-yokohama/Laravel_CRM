@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import PurchaseEditor from '@/Components/PurchaseEditor';
 import { dateToString } from '@/common/dateToString';
+import FlashMessage from '@/Components/FlashMessage';
 
 const Create = (props) => {
   const { auth, customers, items, errors } = props;
@@ -47,6 +48,7 @@ const Create = (props) => {
           </div>
         </div>
       </div>
+      <FlashMessage flash={props.flash} />
     </AuthenticatedLayout>
   );
 };

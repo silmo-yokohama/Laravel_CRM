@@ -171,9 +171,10 @@ class PurchaseController extends Controller
 
         $purchase->save();
 
-        return to_route('purchases.index')->with([
-            'message' => '削除しました。' ,
-            'status'  => 'success'
-        ]);
+        return to_route('purchases.index')
+            ->with([
+                'message' => '削除しました。' ,
+                'status'  => 'success'
+            ]);
     }
 }

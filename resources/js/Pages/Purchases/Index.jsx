@@ -1,3 +1,4 @@
+import FlashMessage from '@/Components/FlashMessage';
 import PurchasePaginations from '@/Components/PurchasePaginate';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { dateTimeToString } from '@/common/dateToString';
@@ -86,6 +87,7 @@ const Index = (props) => {
           </div>
         </div>
       </div>
+      <FlashMessage flash={props.flash} />
     </AuthenticatedLayout>
   );
 };

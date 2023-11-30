@@ -1,5 +1,6 @@
 import CustomerPaginations from '@/Components/CustomerPaginations';
 import CustomerSearchForm from '@/Components/CustomerSearchForm';
+import FlashMessage from '@/Components/FlashMessage';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 
@@ -88,6 +89,7 @@ export default function Index(props) {
           </div>
         </div>
       </div>
+      <FlashMessage flash={props.flash} />
     </AuthenticatedLayout>
   );
 }

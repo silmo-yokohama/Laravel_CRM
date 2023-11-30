@@ -1,3 +1,4 @@
+import FlashMessage from '@/Components/FlashMessage';
 import PurchaseEditor from '@/Components/PurchaseEditor';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { dateToString } from '@/common/dateToString';
@@ -41,7 +42,6 @@ const Edit = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(form.data);
     form.put(route('purchases.update', { purchase: props.purchase.id }));
   };
 
@@ -72,6 +72,7 @@ const Edit = (props) => {
           </div>
         </div>
       </div>
+      <FlashMessage flash={props.flash} />
     </AuthenticatedLayout>
   );
 };
