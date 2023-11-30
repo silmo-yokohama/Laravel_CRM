@@ -1,4 +1,5 @@
 import CustomerEditor from '@/Components/CustomerEditor';
+import FlashMessage from '@/Components/FlashMessage';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import React from 'react';
@@ -17,7 +18,7 @@ const Create = (props) => {
   });
 
   const handleChange = (e) => {
-    const key = e.target.id;
+    const key = e.target.id === 'man' || e.target.id === 'female' ? 'gender' : e.target.id;
     const value = e.target.value;
 
     setData(key, value);
@@ -53,6 +54,7 @@ const Create = (props) => {
           </div>
         </div>
       </div>
+      <FlashMessage flash={props.flash} />
     </AuthenticatedLayout>
   );
 };

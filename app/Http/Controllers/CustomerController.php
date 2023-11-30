@@ -53,7 +53,11 @@ class CustomerController extends Controller
             'memo'  => $request->memo,
         ]);
 
-        return to_route('customers.index');
+        return to_route('customers.index')
+            ->with([
+                'message' => '顧客の登録が完了しました。' ,
+                'status'  => 'success'
+            ]);
     }
 
     /**
@@ -91,9 +95,13 @@ class CustomerController extends Controller
 
         $customer->save();
 
-        return to_route('customers.edit' ,[
+        return to_route('customers.index' ,[
             'customer' => $customer
-        ]);
+        ])
+            ->with([
+                'message' => '顧客情報を更新しました。' ,
+                'status'  => 'success'
+            ]);
     }
 
     /**
@@ -106,6 +114,10 @@ class CustomerController extends Controller
 
         $customer->save();
 
-        return to_route('customers.index');
+        return to_route('customers.index')
+            ->with([
+                'message' => '顧客を削除しました。' ,
+                'status'  => 'success'
+            ]);
     }
 }

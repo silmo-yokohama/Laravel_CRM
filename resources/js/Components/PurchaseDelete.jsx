@@ -1,10 +1,10 @@
 import { useForm } from '@inertiajs/react';
 import React from 'react';
 
-const CustomerDelete = ({ id, processing }) => {
+const PurchaseDelete = ({ id, processing }) => {
   const form = useForm({});
   const deleteCustomer = () => {
-    form.delete(route('customers.destroy', { customer: id }));
+    form.delete(route('purchases.destroy', { purchase: id }));
   };
   return (
     <button
@@ -18,4 +18,4 @@ const CustomerDelete = ({ id, processing }) => {
   );
 };
 
-export default CustomerDelete;
+export default PurchaseDelete;

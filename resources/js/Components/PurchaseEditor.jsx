@@ -3,21 +3,24 @@ import Select from 'react-select';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import ja from 'date-fns/locale/ja';
 import { dateToString } from '@/common/dateToString';
+import PurchaseDelete from './PurchaseDelete';
 
 const PurchaseEditor = (props) => {
-  const { form, customers, items, isEditable, isUpdate, onSubmit, errors } = props;
+  const { id, form, customers, items, isEditable, isUpdate, onSubmit, errors } = props;
   const customerOption = customers.map((customer) => {
     return {
       value: customer.id,
       label: customer.name + '[' + customer.kana + ']',
     };
   });
+
   const todayText = dateToString();
   const totalPrice = (() => {
     let totalPrice = 0;
 
-    items.map((item, index) => {
-      totalPrice += item.price * form.data.items[index];
+    items.map((item) => {
+      const target = form.data.items.find((v) => item.id === v.id);
+      totalPrice += item.price * target.value;
     });
     return totalPrice;
   })();
@@ -26,7 +29,7 @@ const PurchaseEditor = (props) => {
   return (
     <form action="" method="post" onSubmit={onSubmit}>
       <div className="container px-5 py-10 mx-auto">
-        <div className="lg:w-5/6 md:w-2/3 mx-auto">
+        <div className="mx-auto">
           <div className="flex flex-wrap -m-2">
             <div className="p-2 w-2/3">
               <div className="relative">
@@ -38,7 +41,18 @@ const PurchaseEditor = (props) => {
                   name="customer"
                   id="customer"
                   options={customerOption}
-                  onChange={(item) => form.setData('customer_id', item.value)}
+                  defaultValue={
+                    customerOption.length === 1
+                      ? {
+                          id: customerOption[0].id,
+                          label: customerOption[0].label,
+                        }
+                      : {}
+                  }
+                  isDisabled={customerOption.length === 1}
+                  onChange={(item) => {
+                    form.setData('customer_id', item.value);
+                  }}
                 />
               </div>
             </div>
@@ -56,10 +70,7 @@ const PurchaseEditor = (props) => {
                   placeholderText={todayText}
                   className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out disabled:border-0 disabled:bg-transparent"
                   onChange={(selectedDate) => {
-                    console.log(dateToString(selectedDate));
                     form.setData('purchase_date', dateToString(selectedDate));
-
-                    console.log(form.data);
                   }}
                 />
               </div>
@@ -109,20 +120,29 @@ const PurchaseEditor = (props) => {
                               >
                                 <input
                                   type="number"
-                                  value={form.data.items[index]}
+                                  value={form.data.items.find((v) => v.id === item.id).value}
                                   className="text-right w-16 border-1 border-gray-200 py-1 my-1"
                                   onChange={({ target }) => {
                                     if (target.value < 0 || target.value > 10) return;
 
-                                    const data = [...form.data.items];
-                                    data[index] = Number(target.value);
+                                    const itemData = form.data.items.find(
+                                      (data) => item.id === data.id
+                                    );
+                                    const otherData = form.data.items.filter(
+                                      (data) => item.id !== data.id
+                                    );
 
-                                    form.setData('items', data);
+                                    itemData.value = Number(target.value);
+
+                                    form.setData('items', [...otherData, itemData]);
                                   }}
                                 />
                               </td>
                               <td className={`w-2/12 text-right ${index !== 0 ? 'border-t ' : ''}`}>
-                                {'￥' + (item.price * form.data.items[index]).toLocaleString()}
+                                {'￥' +
+                                  (
+                                    item.price * form.data.items.find((v) => item.id === v.id).value
+                                  ).toLocaleString()}
                               </td>
                             </tr>
                           );
@@ -146,7 +166,7 @@ const PurchaseEditor = (props) => {
                     {isUpdate ? '更新' : '作成'}
                   </button>
 
-                  {isUpdate && <CustomerDelete processing={processing} id={id} />}
+                  {isUpdate && <PurchaseDelete processing={form.processing} id={id} />}
                 </div>
               )}
             </div>
