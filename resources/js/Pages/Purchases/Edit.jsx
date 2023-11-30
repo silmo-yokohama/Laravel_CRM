@@ -1,24 +1,48 @@
-import { Head, useForm } from '@inertiajs/react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import React, { useEffect } from 'react';
-
-import 'react-datepicker/dist/react-datepicker.css';
 import PurchaseEditor from '@/Components/PurchaseEditor';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { dateToString } from '@/common/dateToString';
+import { Head, useForm } from '@inertiajs/react';
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import 'react-datepicker/dist/react-datepicker.css';
 
-const Create = (props) => {
-  const { auth, customers, items, errors } = props;
+const Edit = (props) => {
+  const { auth, customer, items, errors } = props;
   const form = useForm({
-    customer_id: '',
+    customer_id: customer[0].id,
     purchase_date: dateToString(),
     items: items.map((item) => {
       return { id: item.id, value: 0 };
     }),
   });
 
+  useEffect(() => {
+    axios
+      .get(`/api/purchase?id=${props.purchase.id}`, { purchase: props.purchase.id })
+      .then((res) => {
+        let selectedDate = null;
+        let selectedItems = items.map((item) => {
+          const find = res.data.find((v) => item.id === v.item_id);
+
+          if (!selectedDate && find) selectedDate = dateToString(new Date(find.created_at));
+          return {
+            id: item.id,
+            value: find ? find.count : 0,
+          };
+        });
+
+        form.setData({
+          customer_id: customer[0].id,
+          purchase_date: selectedDate,
+          items: selectedItems,
+        });
+      });
+  }, []);
+
   const onSubmit = (e) => {
     e.preventDefault();
-    form.post(route('purchases.store'));
+    console.log(form.data);
+    form.put(route('purchases.update', { purchase: props.purchase.id }));
   };
 
   return (
@@ -34,12 +58,13 @@ const Create = (props) => {
             <div className="p-6 text-gray-900">
               <section className="text-gray-600 body-font relative">
                 <PurchaseEditor
+                  id={props.purchase.id}
                   form={form}
-                  customers={customers}
+                  customers={customer}
                   items={items}
                   errors={errors}
                   isEditable={true}
-                  isUpdate={false}
+                  isUpdate={true}
                   onSubmit={onSubmit}
                 />
               </section>
@@ -51,4 +76,4 @@ const Create = (props) => {
   );
 };
 
-export default Create;
+export default Edit;

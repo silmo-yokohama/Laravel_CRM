@@ -16,7 +16,7 @@ const Edit = (props) => {
     gender: customer.gender,
     memo: customer.memo,
   });
-  console.log(customer);
+
   const handleChange = (e) => {
     const key = e.target.id === 'man' || e.target.id === 'female' ? 'gender' : e.target.id;
     const value = e.target.value;

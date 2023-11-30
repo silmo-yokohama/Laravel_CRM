@@ -21,7 +21,7 @@ const CustomerEditor = ({
   return (
     <form action="" method="post" onSubmit={onSubmit}>
       <div className="container px-5 py-10 mx-auto">
-        <div className="lg:w-5/6 md:w-2/3 mx-auto">
+        <div className="mx-auto">
           <div className="flex flex-wrap -m-2">
             <div className="p-2 w-1/2">
               <div className="relative">

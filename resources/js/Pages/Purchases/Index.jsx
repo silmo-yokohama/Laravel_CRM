@@ -1,17 +1,11 @@
-import CustomerPaginations from '@/Components/CustomerPaginations';
-import CustomerSearchForm from '@/Components/CustomerSearchForm';
+import PurchasePaginations from '@/Components/PurchasePaginate';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { dateTimeToString } from '@/common/dateToString';
+import { Head, Link } from '@inertiajs/react';
+import React from 'react';
 
-export default function Index(props) {
-  const { auth, customers } = props;
-  const form = useForm({});
-  const setSearchText = (e) => {
-    form.setData('search', e.target.value);
-  };
-  const searchCustomer = () => {
-    form.get(route('customers.index', { search: form.data.search }));
-  };
+const Index = (props) => {
+  const { auth, orders } = props;
 
   return (
     <AuthenticatedLayout
@@ -27,15 +21,9 @@ export default function Index(props) {
               <section className="text-gray-600 body-font">
                 <div className="container px-5 py-10 mx-auto">
                   <div className="flex flex-col text-center w-full mb-5">
-                    <div className="flex pl-4 mt-4 w-full mx-auto">
-                      <CustomerSearchForm
-                        value={form.data.search}
-                        onChange={setSearchText}
-                        onClick={searchCustomer}
-                      />
-
+                    <div className="flex pl-4 mt-4  w-full mx-auto">
                       <Link
-                        href={route('customers.create')}
+                        href={route('purchases.create')}
                         as="button"
                         className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded"
                       >
@@ -52,36 +40,46 @@ export default function Index(props) {
                             ID
                           </th>
                           <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                            Name
+                            顧客名
                           </th>
                           <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                            Kana
+                            購入金額
                           </th>
                           <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                            Tel Number
+                            ステータス
+                          </th>
+                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            購入日時
                           </th>
                         </tr>
                       </thead>
                       <tbody>
-                        {customers &&
-                          customers.data &&
-                          customers.data.map((customer) => (
-                            <tr key={customer.id}>
-                              <td className="px-4 py-3">{customer.id}</td>
-                              <td className="px-4 py-3">
-                                <Link href={route('customers.edit', { customer: customer.id })}>
-                                  {customer.name}
-                                </Link>
-                              </td>
-                              <td className="px-4 py-3">{customer.kana}</td>
-                              <td className="px-4 py-3 text-lg text-gray-900">{customer.tel}</td>
-                            </tr>
-                          ))}
+                        {orders &&
+                          orders.data &&
+                          orders.data.map((item, index) => {
+                            const dateString = dateTimeToString(new Date(item.created_at));
+                            const totalPrice = '￥ ' + Number(item.total).toLocaleString();
+                            const status = item.is_cancelled ? 'キャンセル' : '購入済み';
+
+                            return (
+                              <tr key={index}>
+                                <td className="px-4 py-3">{item.id}</td>
+                                <td className="px-4 py-3">
+                                  <Link href={route('purchases.edit', { purchase: item.id })}>
+                                    {item.customer_name}
+                                  </Link>
+                                </td>
+                                <td className="px-4 py-3">{totalPrice}</td>
+                                <td className="px-4 py-3">{status}</td>
+                                <td className="px-4 py-3">{dateString}</td>
+                              </tr>
+                            );
+                          })}
                       </tbody>
                     </table>
                   </div>
 
-                  <CustomerPaginations links={customers.links} />
+                  <PurchasePaginations links={orders.links} />
                 </div>
               </section>
             </div>
@@ -90,4 +88,6 @@ export default function Index(props) {
       </div>
     </AuthenticatedLayout>
   );
-}
+};
+
+export default Index;

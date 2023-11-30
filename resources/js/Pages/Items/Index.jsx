@@ -18,7 +18,7 @@ export default function Index(props) {
               <section className="text-gray-600 body-font">
                 <div className="container px-5 py-10 mx-auto">
                   <div className="flex flex-col text-center w-full mb-5">
-                    <div className="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
+                    <div className="flex pl-4 mt-4 w-full mx-auto">
                       <a className="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0">
                         Learn More
                       </a>
@@ -33,7 +33,7 @@ export default function Index(props) {
                     </div>
                   </div>
 
-                  <div className="lg:w-2/3 w-full mx-auto overflow-auto">
+                  <div className="w-full mx-auto overflow-auto">
                     <table className="table-auto w-full text-left whitespace-no-wrap">
                       <thead>
                         <tr>

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('customer_id')->constrained()->onUpdate('cascade');
             $table->boolean('is_cancelled')->default(false);
+            $table->boolean('is_deleted')->default(false);
+            $table->dateTime('deleted_at')->nullable();
             $table->timestamps();
         });
     }
