@@ -18,6 +18,18 @@ class Order extends Model
         }
     }
 
+    function scopeBetweenDate($query ,$startDate = null ,$endDate = null) {
+        if(!is_null($startDate)) {
+            $query->where('created_at' ,'>=' ,$startDate);
+        }
+
+        if(!is_null($endDate)) {
+            $query->where('created_at' ,'<=' ,$endDate);
+        }
+
+        return $query;
+    }
+
 
     protected static function booted() {
         static::addGlobalScope(new Subtotal);
