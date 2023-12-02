@@ -1,6 +1,6 @@
 import CustomerPaginations from '@/Components/CustomerPaginations';
 import CustomerSearchForm from '@/Components/CustomerSearchForm';
-import FlashMessage from '@/Components/FlashMessage';
+import FlashMessage from '@/Components/Forms/Labels/FlashMessage';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 

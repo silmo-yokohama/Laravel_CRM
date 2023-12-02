@@ -14,7 +14,9 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $itemList = Item::select('id','name','price' ,'is_selling' ,'updated_at')->where('is_deleted' ,'=','false')->get();
+        $itemList = Item::select('id','name','price' ,'is_selling' ,'updated_at')
+            ->where('is_deleted' ,'=','false')
+            ->get();
         // dd($itemList);
         return Inertia::render('Items/Index' ,[
             'items' => $itemList

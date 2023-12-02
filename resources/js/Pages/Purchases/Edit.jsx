@@ -1,5 +1,5 @@
-import FlashMessage from '@/Components/FlashMessage';
-import PurchaseEditor from '@/Components/PurchaseEditor';
+import PurchaseEditor from '@/Components/Editors/PurchaseEditor';
+import FlashMessage from '@/Components/Forms/Labels/FlashMessage';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { dateToString } from '@/common/dateToString';
 import { Head, useForm } from '@inertiajs/react';

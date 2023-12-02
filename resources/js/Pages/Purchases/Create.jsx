@@ -3,9 +3,9 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import React, { useEffect } from 'react';
 
 import 'react-datepicker/dist/react-datepicker.css';
-import PurchaseEditor from '@/Components/PurchaseEditor';
+import PurchaseEditor from '@/Components/Editors/PurchaseEditor';
 import { dateToString } from '@/common/dateToString';
-import FlashMessage from '@/Components/FlashMessage';
+import FlashMessage from '@/Components/Forms/Labels/FlashMessage';
 
 const Create = (props) => {
   const { auth, customers, items, errors } = props;

@@ -5,7 +5,7 @@ import { Inertia } from '@inertiajs/inertia';
 import InputError from '@/Components/InputError';
 import ItemsEditor from '@/Components/ItemsEditor';
 import ItemDelete from '@/Components/ItemDelete';
-import FlashMessage from '@/Components/FlashMessage';
+import FlashMessage from '@/Components/Forms/Labels/FlashMessage';
 
 export default function Create(props) {
   const { auth, item } = props;

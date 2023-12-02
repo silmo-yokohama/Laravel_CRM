@@ -2,8 +2,8 @@ import React from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import ja from 'date-fns/locale/ja';
 import 'react-datepicker/dist/react-datepicker.css';
-import InputError from './InputError';
-import CustomerDelete from './CustomerDelete';
+import InputError from '../Forms/Labels/InputError';
+import CustomerDelete from '../CustomerDelete';
 import { dateToString } from '@/common/dateToString';
 
 const CustomerEditor = ({

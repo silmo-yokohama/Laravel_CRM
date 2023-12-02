@@ -1,7 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import ItemsEditor from '@/Components/ItemsEditor';
-import FlashMessage from '@/Components/FlashMessage';
+import FlashMessage from '@/Components/Forms/Labels/FlashMessage';
 
 export default function Create(props) {
   const { auth, item } = props;

@@ -1,4 +1,4 @@
-import FlashMessage from '@/Components/FlashMessage';
+import FlashMessage from '@/Components/Forms/Labels/FlashMessage';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { dateTimeToString } from '@/common/dateToString';
 import { Head, Link } from '@inertiajs/react';

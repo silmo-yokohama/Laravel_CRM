@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import IconCheckMark from './IconCheckMark';
-import IconInformatiion from './IconInformatiion';
+import IconCheckMark from '../../Images/Icons/IconCheckMark';
+import IconInformatiion from '../../Images/Icons/IconInformatiion';
 
 const FlashMessage = ({ flash }) => {
   const { message, status } = flash;
@@ -32,8 +32,8 @@ const FlashMessage = ({ flash }) => {
           }
         >
           {status === 'success' ? <IconCheckMark /> : <IconInformatiion />}
-          <div class="text-xl font-normal  max-w-full flex-initial">{message}</div>
-          <div class="flex flex-auto flex-row-reverse" onClick={() => setIsVisible(false)}>
+          <div className="text-xl font-normal  max-w-full flex-initial">{message}</div>
+          <div className="flex flex-auto flex-row-reverse" onClick={() => setIsVisible(false)}>
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

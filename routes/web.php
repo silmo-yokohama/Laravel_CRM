@@ -34,12 +34,13 @@ Route::resource('purchases' ,PurchaseController::class)
 Route::get('analysis',[AnalysisController::class ,'index'])->name('analysis.index');
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return to_route('dashboard');
+    // return Inertia::render('Welcome', [
+    //     'canLogin' => Route::has('login'),
+    //     'canRegister' => Route::has('register'),
+    //     'laravelVersion' => Application::VERSION,
+    //     'phpVersion' => PHP_VERSION,
+    // ]);
 })->name('welcome');
 
 Route::get('/dashboard', function () {

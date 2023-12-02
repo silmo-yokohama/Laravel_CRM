@@ -3,7 +3,7 @@ import Select from 'react-select';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import ja from 'date-fns/locale/ja';
 import { dateToString } from '@/common/dateToString';
-import PurchaseDelete from './PurchaseDelete';
+import PurchaseDelete from '../PurchaseDelete';
 
 const PurchaseEditor = (props) => {
   const { id, form, customers, items, isEditable, isUpdate, onSubmit, errors } = props;

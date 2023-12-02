@@ -1,5 +1,5 @@
 import React from 'react';
-import InputError from './InputError';
+import InputError from '../Forms/Labels/InputError';
 
 const ItemsEditor = ({ itemValues, onChange, onSubmit, isEditable, errors, processing }) => {
   errors = errors || {};

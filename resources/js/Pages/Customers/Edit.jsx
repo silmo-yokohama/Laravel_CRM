@@ -1,5 +1,5 @@
-import CustomerEditor from '@/Components/CustomerEditor';
-import FlashMessage from '@/Components/FlashMessage';
+import CustomerEditor from '@/Components/Editors/CustomerEditor';
+import FlashMessage from '@/Components/Forms/Labels/FlashMessage';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import React from 'react';

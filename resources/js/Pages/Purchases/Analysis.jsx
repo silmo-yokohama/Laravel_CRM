@@ -1,5 +1,4 @@
-import FlashMessage from '@/Components/FlashMessage';
-import PurchasePaginations from '@/Components/PurchasePaginate';
+import FlashMessage from '@/Components/Forms/Labels/FlashMessage';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { dateTimeToString, dateToString } from '@/common/dateToString';
 import { Head, Link, useForm } from '@inertiajs/react';
@@ -9,8 +8,8 @@ import ja from 'date-fns/locale/ja';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Bar } from 'recharts';
 
 import 'react-datepicker/dist/react-datepicker.css';
-import PrimaryButton from '@/Components/PrimaryButton';
 import axios from 'axios';
+import PrimaryButton from '@/Components/Forms/Buttons/PrimaryButton';
 
 const Analysis = (props) => {
   const { auth } = props;

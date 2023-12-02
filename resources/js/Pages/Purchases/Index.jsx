@@ -1,4 +1,4 @@
-import FlashMessage from '@/Components/FlashMessage';
+import FlashMessage from '@/Components/Forms/Labels/FlashMessage';
 import PurchasePaginations from '@/Components/PurchasePaginate';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { dateTimeToString } from '@/common/dateToString';
