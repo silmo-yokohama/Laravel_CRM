@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AnalysisController;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->get('/purchase' ,function(Request $request) {
     return Order::select('*')->where('id', '=' ,$request->id)->get();
 });
+
+
+Route::middleware('auth:sanctum')->get('analysis' ,[
+    AnalysisController::class ,'index'
+])->name('api.analysis');

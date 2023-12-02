@@ -39,6 +39,9 @@ export default function Authenticated({ user, header, children }) {
                 >
                   購入管理
                 </NavLink>
+                <NavLink href={route('analysis.index')} active={route().current('analysis.index')}>
+                  解析
+                </NavLink>
               </div>
             </div>
 
